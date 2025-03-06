@@ -17,10 +17,7 @@ namespace Estrrado___ASP.net_Machine_test.Controllers
         {
             return View();
         }
-        public ActionResult Login()
-        {
-            return View();
-        }
+      
         [HttpGet]
         public ActionResult Registration()
         {
@@ -50,6 +47,35 @@ namespace Estrrado___ASP.net_Machine_test.Controllers
 
             // If ModelState is invalid, return the same view with the model
             return View(student);
+        }
+
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(string email, string password)
+        {
+            using (var db = new StudentDbContext())
+            {
+                var user = db.Students.FirstOrDefault(s => s.Email == email && s.Password == password);
+
+                if (user != null)
+                {
+                    // Store user info in session
+                    HttpContext.Session.SetString("UserEmail", user.Email);
+                    HttpContext.Session.SetString("UserName", user.FirstName);
+
+                    return RedirectToAction("Dashboard"); // Redirect to a dashboard after login
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = "Invalid email or password.";
+                    return View();
+                }
+            }
         }
 
         public IActionResult Privacy()
