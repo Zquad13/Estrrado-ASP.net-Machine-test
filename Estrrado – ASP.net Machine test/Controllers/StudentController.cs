@@ -7,15 +7,15 @@ public class StudentController : Controller
     private StudentDbContext db = new StudentDbContext();
 
     [HttpGet]
-    public ActionResult Create()
+    public ActionResult Registration()
     {
         return View();
     }
 
     [HttpPost]
-    public ActionResult Create(Student student)
+    public ActionResult Registration(Student student)
     {
-        if (ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
             // Hash password
             student.Password = PasswordHasher.HashPassword(student.Password);

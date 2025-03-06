@@ -18,37 +18,7 @@ namespace Estrrado___ASP.net_Machine_test.Controllers
             return View();
         }
       
-        [HttpGet]
-        public ActionResult Registration()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult Registration(Student student)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    using (var db = new StudentDbContext())
-                    {
-                        // Add the student and qualifications to the database
-                        db.Students.Add(student);
-                        db.SaveChanges();
-                    }
-
-                    return RedirectToAction("Details", new { id = student.StudentId });
-                }
-                catch (Exception ex)
-                {
-                    ModelState.AddModelError("", "An error occurred while saving the student: " + ex.Message);
-                }
-            }
-
-            // If ModelState is invalid, return the same view with the model
-            return View(student);
-        }
-
+      
         [HttpGet]
         public ActionResult Login()
         {
