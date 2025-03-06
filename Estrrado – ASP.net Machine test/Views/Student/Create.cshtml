@@ -1,0 +1,95 @@
+﻿@model Estrrado___ASP.net_Machine_test.Models.Student
+
+@{
+    ViewBag.Title = "Create Student";
+}
+
+<h2>Create Student</h2>
+
+@using (Html.BeginForm("Create", "Student", FormMethod.Post, new { id = "registrationForm" }))
+{
+    <div>
+        @Html.LabelFor(m => m.FirstName)
+        @Html.TextBoxFor(m => m.FirstName)
+        @Html.ValidationMessageFor(m => m.FirstName)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.LastName)
+        @Html.TextBoxFor(m => m.LastName)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Age)
+        @Html.TextBoxFor(m => m.Age)
+        @Html.ValidationMessageFor(m => m.Age)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.DOB)
+        @Html.TextBoxFor(m => m.DOB, new { type = "date" })
+        @Html.ValidationMessageFor(m => m.DOB)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Gender)
+        @Html.DropDownListFor(m => m.Gender, new List<SelectListItem>
+    {
+    new SelectListItem { Text = "Male", Value = "Male" },
+    new SelectListItem { Text = "Female", Value = "Female" }
+    })
+        @Html.ValidationMessageFor(m => m.Gender)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email)
+        @Html.ValidationMessageFor(m => m.Email)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.PhoneNumber)
+        @Html.TextBoxFor(m => m.PhoneNumber)
+        @Html.ValidationMessageFor(m => m.PhoneNumber)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Username)
+        @Html.TextBoxFor(m => m.Username)
+        @Html.ValidationMessageFor(m => m.Username)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Password)
+        @Html.PasswordFor(m => m.Password)
+        @Html.ValidationMessageFor(m => m.Password)
+    </div>
+    <div id="qualifications">
+        <h3>Qualifications</h3>
+        <button type="button" id="addQualification">Add Qualification</button>
+    </div>
+    <button type="submit">Submit</button>
+}
+
+@section Scripts {
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#registrationForm").validate({
+                rules: {
+                    FirstName: "required",
+                    Age: { required: true, number: true },
+                    DOB: "required",
+                    Gender: "required",
+                    Email: { required: true, email: true },
+                    PhoneNumber: { required: true, digits: true },
+                    Username: "required",
+                    Password: "required"
+                },
+                messages: {
+                    FirstName: "Please enter your first name",
+                    Age: { required: "Please enter your age", number: "Please enter a valid number" },
+                    DOB: "Please enter your date of birth",
+                    Gender: "Please select your gender",
+                    Email: { required: "Please enter your email", email: "Please enter a valid email" },
+                    PhoneNumber: { required: "Please enter your phone number", digits: "Please enter a valid phone number" },
+                    Username: "Please enter a username",
+                    Password: "Please enter a password"
+                }
+            });
+        });
+    </script>
+}

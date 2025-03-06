@@ -1,0 +1,51 @@
+﻿@model Estrrado___ASP.net_Machine_test.Models.Student
+
+<h2>Student Details</h2>
+
+<div>
+    <strong>Student ID:</strong> @Model.StudentId
+</div>
+<div>
+    <strong>Name:</strong> @Model.FirstName @Model.LastName
+</div>
+<div>
+    <strong>Age:</strong> @Model.Age
+</div>
+<div>
+    <strong>Date of Birth:</strong> @Model.DOB.ToShortDateString()
+</div>
+<div>
+    <strong>Gender:</strong> @Model.Gender
+</div>
+<div>
+    <strong>Email:</strong> @Model.Email
+</div>
+<div>
+    <strong>Phone Number:</strong> @Model.PhoneNumber
+</div>
+<div>
+    <strong>Username:</strong> @Model.Username
+</div>
+
+<h3>Qualifications</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Course Name</th>
+            <th>University</th>
+            <th>Year</th>
+            <th>Percentage</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var qualification in Model.Qualifications)
+        {
+            <tr>
+                <td>@qualification.CourseName</td>
+                <td>@qualification.University</td>
+                <td>@qualification.Year</td>
+                <td>@qualification.Percentage</td>
+            </tr>
+        }
+    </tbody>
+</table>

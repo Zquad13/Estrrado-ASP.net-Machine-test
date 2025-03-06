@@ -1,0 +1,117 @@
+﻿@model Estrrado___ASP.net_Machine_test.Models.Student
+
+@{
+    ViewBag.Title = "Student Registration";
+}
+
+<h2>Student Registration</h2>
+
+@using (Html.BeginForm("Registration", "Home", FormMethod.Post, new { id = "registrationForm" }))
+{
+    <div>
+        @Html.LabelFor(m => m.FirstName)
+        @Html.TextBoxFor(m => m.FirstName)
+        @Html.ValidationMessageFor(m => m.FirstName)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.LastName)
+        @Html.TextBoxFor(m => m.LastName)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Age)
+        @Html.TextBoxFor(m => m.Age)
+        @Html.ValidationMessageFor(m => m.Age)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.DOB)
+        @Html.TextBoxFor(m => m.DOB, new { type = "date" })
+        @Html.ValidationMessageFor(m => m.DOB)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Gender)
+        @Html.DropDownListFor(m => m.Gender, new List<SelectListItem>
+    {
+    new SelectListItem { Text = "Male", Value = "Male" },
+    new SelectListItem { Text = "Female", Value = "Female" }
+    })
+        @Html.ValidationMessageFor(m => m.Gender)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email)
+        @Html.ValidationMessageFor(m => m.Email)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.PhoneNumber)
+        @Html.TextBoxFor(m => m.PhoneNumber)
+        @Html.ValidationMessageFor(m => m.PhoneNumber)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Username)
+        @Html.TextBoxFor(m => m.Username)
+        @Html.ValidationMessageFor(m => m.Username)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Password)
+        @Html.PasswordFor(m => m.Password)
+        @Html.ValidationMessageFor(m => m.Password)
+    </div>
+
+    <h3>Qualifications</h3>
+    <div id="qualifications">
+        <div class="qualification">
+            <div>
+                @Html.Label("Course Name")
+                @Html.TextBox("Qualifications[0].CourseName")
+            </div>
+            <div>
+                @Html.Label("University")
+                @Html.TextBox("Qualifications[0].University")
+            </div>
+            <div>
+                @Html.Label("Year")
+                @Html.TextBox("Qualifications[0].Year", new { type = "number" })
+            </div>
+            <div>
+                @Html.Label("Percentage")
+                @Html.TextBox("Qualifications[0].Percentage", new { type = "number" })
+            </div>
+        </div>
+    </div>
+    <button type="button" id="addQualification">Add Qualification</button>
+
+    <button type="submit">Register</button>
+}
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            let qualificationIndex = 1;
+
+            $("#addQualification").click(function () {
+                const newQualification = `
+                    <div class="qualification">
+                        <div>
+                            <label>Course Name</label>
+                            <input type="text" name="Qualifications[${qualificationIndex}].CourseName" />
+                        </div>
+                        <div>
+                            <label>University</label>
+                            <input type="text" name="Qualifications[${qualificationIndex}].University" />
+                        </div>
+                        <div>
+                            <label>Year</label>
+                            <input type="number" name="Qualifications[${qualificationIndex}].Year" />
+                        </div>
+                        <div>
+                            <label>Percentage</label>
+                            <input type="number" name="Qualifications[${qualificationIndex}].Percentage" />
+                        </div>
+                    </div>
+                `;
+                $("#qualifications").append(newQualification);
+                qualificationIndex++;
+            });
+        });
+    </script>
+}
